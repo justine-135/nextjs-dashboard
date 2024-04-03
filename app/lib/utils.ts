@@ -1,4 +1,6 @@
+import { revalidatePath } from 'next/cache';
 import { Revenue } from './definitions';
+import { redirect } from 'next/navigation';
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
@@ -66,4 +68,9 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     '...',
     totalPages,
   ];
+};
+
+export const revalidateRedirectPath = (path: string) => {
+  revalidatePath(path);
+  redirect(path);
 };
